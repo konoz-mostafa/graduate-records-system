@@ -584,3 +584,11 @@ button.trash-btn {
         justify-content: center;
     }
 }
+
+.app-container[dir="rtl"] {
+    direction: rtl;
+}
+
+.header-content[dir="rtl"] {
+    flex-direction: row-reverse;
+}

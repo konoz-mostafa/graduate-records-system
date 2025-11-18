@@ -120,7 +120,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container" dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
     <header className="app-header">
       <div className="header-content">
         <div className="header-left">

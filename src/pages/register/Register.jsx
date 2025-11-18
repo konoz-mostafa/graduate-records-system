@@ -65,7 +65,7 @@ const Register = ({ onSwitchToLogin }) => {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container" dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="auth-container">
         <div className="auth-card">
           <div className="auth-header">

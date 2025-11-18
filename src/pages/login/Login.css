@@ -195,3 +195,32 @@
     font-size: 0.85rem;
   }
 }
+
+/* Direction */
+.auth-container[dir="rtl"] {
+  direction: rtl;
+}
+
+.auth-container[dir="ltr"] {
+  direction: ltr;
+}
+
+.auth-header[dir="rtl"] {
+  text-align: right;
+}
+
+.auth-header[dir="ltr"] {
+  text-align: center; 
+}
+
+.auth-switch[dir="rtl"] {
+  text-align: right;
+}
+
+.auth-switch[dir="ltr"] {
+  text-align: center;
+}
+.auth-form[dir="rtl"] .form-group {
+  flex-direction: column; 
+  text-align: right;
+}
