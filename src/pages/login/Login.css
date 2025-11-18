@@ -133,3 +133,65 @@
   color: #0b698f;
   text-decoration: underline;
 }
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 1.5rem;
+    max-width: 380px;
+  }
+
+  .auth-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .auth-header p {
+    font-size: 0.9rem;
+  }
+
+  .form-group input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .btn-primary {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.2rem;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  .auth-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .auth-icon .icon {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .form-group input {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .btn-primary {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .auth-switch {
+    font-size: 0.85rem;
+  }
+}
