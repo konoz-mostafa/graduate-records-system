@@ -9,7 +9,7 @@
   padding: 1rem;
   /* background-image: 
       linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)),
-      url('./helwan-img.jpeg'); 
+      url('./helwan-img.jpg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -90,7 +90,7 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: #10b981;
+  border-color: #1089b9;
   box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
 }
 
@@ -98,7 +98,7 @@
 .btn-primary {
   width: 100%;
   padding: 0.875rem;
-  background-color: #10b981;
+  background-color: #1089b9;
   color: white;
   border: none;
   border-radius: 8px;
@@ -110,7 +110,7 @@
 }
 
 .btn-primary:hover {
-  background-color: #059669;
+  background-color: #0b698f;
 }
 
 .auth-switch {
@@ -130,6 +130,6 @@
 }
 
 .link-button:hover {
-  color: #10b981;
+  color: #0b698f;
   text-decoration: underline;
 }

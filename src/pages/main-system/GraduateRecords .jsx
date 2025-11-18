@@ -121,7 +121,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
     <header className="app-header">
       <div className="header-content">
         <div className="header-left">
-          <h1><Archive size={18}/>Graduate Records System</h1>
+          <h1>Graduate Records System</h1>
           <p className="user-welcome">Welcome, {currentUser}</p>
         </div>
         <div className="header-right">
@@ -146,7 +146,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
     className="file-input"
   />
   <label htmlFor="fileUpload" className="upload-label">
-    <Upload className="icon-sm" /> Choose File
+    <Upload className="icon-sm" /> Choose File (.json, .xlsx, .xls)
   </label>
   <p className="upload-hint">Allowed formats: JSON or Excel (.json, .xlsx, .xls)</p>
 
