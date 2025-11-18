@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import '../../i18n/i18n';
-import { Flag, User } from 'lucide-react';
+import { Flag, User ,Globe} from 'lucide-react';
 import './Register.css'
 
 
@@ -153,7 +153,7 @@ const Register = ({ onSwitchToLogin }) => {
     className="icon-btn" 
     onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en')}
   >
-    <Flag size={20} /> {i18n.language === 'en' ? 'AR' : 'EN'}
+    <Globe size={20} /> {i18n.language === 'en' ? 'AR' : 'EN'}
   </button>
 </div>
       </div>

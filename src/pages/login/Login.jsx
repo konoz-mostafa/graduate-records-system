@@ -3,7 +3,7 @@ import { User } from 'lucide-react';
 import './Login.css';
 import { useTranslation } from 'react-i18next';
 import '../../i18n/i18n';
-import { Flag } from 'lucide-react';
+import { Flag,Globe } from 'lucide-react';
 
 const Login = ({ onLogin, onSwitchToRegister }) => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -101,7 +101,7 @@ const Login = ({ onLogin, onSwitchToRegister }) => {
     className="icon-btn" 
     onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en')}
   >
-    <Flag size={20} /> {i18n.language === 'en' ? 'AR' : 'EN'}
+    <Globe size={20} /> {i18n.language === 'en' ? 'AR' : 'EN'}
   </button>
 </div>
 
