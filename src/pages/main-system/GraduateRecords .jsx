@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Upload, Plus, Trash2, Eye, FileText, Calendar, LogOut, Database, Archive } from 'lucide-react';
+import { Upload, Plus, Trash2, Eye, FileText, Calendar, LogOut, Database, Archive ,ArrowLeft} from 'lucide-react';
 import * as XLSX from 'xlsx';
 import './GraduateRecords.css';
 
@@ -172,7 +172,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
             </div>
             <div className="batch-actions">
               <button className="btn-icon" onClick={handleAddRow}>
-                <Plus className="icon-add" /> Add Row
+                <Plus className="icon-add" /> 
               </button>
               <button className="btn-save" onClick={handleSaveBatch}>
                 Save All
@@ -278,7 +278,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
               <h2 className="card-title">{selectedUpload.fileName}</h2>
               <p className="upload-detail-meta">{new Date(selectedUpload.date).toLocaleString()} • {selectedUpload.recordCount} records</p>
             </div>
-            <button onClick={() => setSelectedUpload(null)} className="btn-back">Back to History</button>
+            <button onClick={() => setSelectedUpload(null)} className="btn-back"><ArrowLeft size={18} />Back to History</button>
           </div>
           <div className="table-container">
             <table className="data-table">
