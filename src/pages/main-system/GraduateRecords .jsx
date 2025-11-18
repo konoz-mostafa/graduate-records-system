@@ -1,4 +1,6 @@
-
+import { useTranslation } from 'react-i18next';
+import '../../i18n/i18n';
+import { Globe  } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { Upload, Plus, Trash2, Eye, FileText, Calendar, LogOut, Database, Archive ,ArrowLeft} from 'lucide-react';
 import * as XLSX from 'xlsx';
@@ -12,6 +14,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
   const [activeView, setActiveView] = useState('workspace');
   const [selectedUpload, setSelectedUpload] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const { t, i18n } = useTranslation();
 
   const [newGraduate, setNewGraduate] = useState({
     fullName: '',
@@ -60,9 +63,9 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
       setGraduates(result.graduates);
       setUploadHistory(result.uploadHistory);
       setSelectedFile(null);
-      alert(`Successfully uploaded ${result.uploadCount} records`);
+      alert(t('uploadSuccess', { count: result.uploadCount }));
     } catch (error) {
-      alert('Upload failed: ' + error.message);
+      alert(t('uploadFailed', { message: error.message }));
     }
   };
   
@@ -74,7 +77,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
   const handleAddRow = () => {
     if (!newGraduate.fullName || !newGraduate.nationalId || !newGraduate.faculty || 
         !newGraduate.department || !newGraduate.graduationYear) {
-      alert('Please fill in all fields');
+          alert(t('fillAllFields'));
       return;
     }
     setNewGraduatesBatch([...newGraduatesBatch, { ...newGraduate }]);
@@ -100,7 +103,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
       setUploadHistory(result.uploadHistory);
       setNewGraduatesBatch([]);
     } catch (error) {
-      alert('Failed to save batch: ' + error.message);
+      alert(t('saveBatchFailed', { message: error.message }));
     }
   };
 
@@ -112,7 +115,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
       setSelectedUpload(null);
       setActiveView('workspace');
     } catch (error) {
-      alert('Failed to delete upload: ' + error.message);
+      alert(t('deleteUploadFailed', { message: error.message }));
     }
   };
 
@@ -121,13 +124,21 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
     <header className="app-header">
       <div className="header-content">
         <div className="header-left">
-          <h1>Graduate Records System</h1>
-          <p className="user-welcome">Welcome, {currentUser}</p>
+          <h1>{t('appTitle')}</h1>
+          <p className="user-welcome">{t('welcomeUser', { user: currentUser })}</p>
         </div>
         <div className="header-right">
-          <button onClick={() => setActiveView('workspace')} className={`nav-btn ${activeView === 'workspace' ? 'active' : ''}`}>Workspace</button>
-          <button onClick={() => setActiveView('history')} className={`nav-btn ${activeView === 'history' ? 'active' : ''}`}>Upload History</button>
+       
+          <button onClick={() => setActiveView('workspace')} className={`nav-btn ${activeView === 'workspace' ? 'active' : ''}`}>{t('workspace')}</button>
+          <button onClick={() => setActiveView('history')} className={`nav-btn ${activeView === 'history' ? 'active' : ''}`}>{t('uploadHistory')}</button>
+          <button 
+    className="icon-btn lang-btn" 
+    onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en')}
+  >
+    <Globe  size={20} /> {i18n.language === 'en' ? 'AR' : 'EN'}
+  </button>
           <button onClick={onLogout} className="logout-btn"><LogOut className="icon-sm" /></button>
+          
         </div>
       </div>
     </header>
@@ -136,7 +147,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
       {activeView === 'workspace' && (
         <div className="workspace">
           <section className="card">
-            <h2 className="card-title"><Upload className="icon-sm" /> Upload Files</h2>
+            <h2 className="card-title"><Upload className="icon-sm" /> {t('uploadFiles')}</h2>
             <div className="upload-zone">
   <input
     type="file"
@@ -146,15 +157,15 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
     className="file-input"
   />
   <label htmlFor="fileUpload" className="upload-label">
-    <Upload className="icon-sm" /> Choose File (.json, .xlsx, .xls)
+    <Upload className="icon-sm" /> {t('chooseFile')}
   </label>
-  <p className="upload-hint">Allowed formats: JSON or Excel (.json, .xlsx, .xls)</p>
+  <p className="upload-hint">{t('uploadHint')}</p>
 
   {selectedFile && (
     <div className="upload-preview">
       <span>{selectedFile.name}</span>
-      <button className="save-upload" onClick={handleSaveUpload}>Save Upload</button>
-      <button className="cancel-upload" onClick={handleCancelUpload}>Cancel</button>
+      <button className="save-upload" onClick={handleSaveUpload}>{t('saveUpload')}</button>
+      <button className="cancel-upload" onClick={handleCancelUpload}>{t('cancel')}</button>
     </div>
   )}
 </div>
@@ -162,34 +173,34 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
           </section>
 
           <section className="card">
-            <h2 className="card-title"><Plus className="icon-sm" /> Manual Entry</h2>
+            <h2 className="card-title"><Plus className="icon-sm" /> {t('manualEntry')}</h2>
             <div className="manual-entry-grid">
-              <input type="text" placeholder="Full Name" value={newGraduate.fullName} onChange={(e) => setNewGraduate({...newGraduate, fullName: e.target.value})} className="input-field"/>
-              <input type="text" placeholder="National ID" value={newGraduate.nationalId} onChange={(e) => setNewGraduate({...newGraduate, nationalId: e.target.value})} className="input-field"/>
-              <input type="text" placeholder="Faculty" value={newGraduate.faculty} onChange={(e) => setNewGraduate({...newGraduate, faculty: e.target.value})} className="input-field"/>
-              <input type="text" placeholder="Department" value={newGraduate.department} onChange={(e) => setNewGraduate({...newGraduate, department: e.target.value})} className="input-field"/>
-              <input type="text" placeholder="Graduation Year" value={newGraduate.graduationYear} onChange={(e) => setNewGraduate({...newGraduate, graduationYear: e.target.value})} className="input-field"/>
+              <input type="text" placeholder={t('fullName')} value={newGraduate.fullName} onChange={(e) => setNewGraduate({...newGraduate, fullName: e.target.value})} className="input-field"/>
+              <input type="text" placeholder={t('nationalId')} value={newGraduate.nationalId} onChange={(e) => setNewGraduate({...newGraduate, nationalId: e.target.value})} className="input-field"/>
+              <input type="text" placeholder={t('faculty')} value={newGraduate.faculty} onChange={(e) => setNewGraduate({...newGraduate, faculty: e.target.value})} className="input-field"/>
+              <input type="text" placeholder={t('department')} value={newGraduate.department} onChange={(e) => setNewGraduate({...newGraduate, department: e.target.value})} className="input-field"/>
+              <input type="text" placeholder={t('graduationYear')} value={newGraduate.graduationYear} onChange={(e) => setNewGraduate({...newGraduate, graduationYear: e.target.value})} className="input-field"/>
             </div>
             <div className="batch-actions">
               <button className="btn-icon" onClick={handleAddRow}>
                 <Plus className="icon-add" /> 
               </button>
               <button className="btn-save" onClick={handleSaveBatch}>
-                Save All
+              {t('saveAll')}
               </button>
             </div>
 
             {newGraduatesBatch.length > 0 && (
               <div className="batch-preview">
-                <h3>Batch Preview ({newGraduatesBatch.length})</h3>
+                <h3>{t('batchPreview')} ({newGraduatesBatch.length})</h3>
                 <table className="data-table">
                   <thead>
                     <tr>
-                      <th>Full Name</th>
-                      <th>National ID</th>
-                      <th>Faculty</th>
-                      <th>Department</th>
-                      <th>Graduation Year</th>
+                      <th>{t('fullName')}</th>
+                      <th>{t('nationalId')}</th>
+                      <th>{t('faculty')}</th>
+                      <th>{t('department')}</th>
+                      <th>{t('graduationYear')}</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -215,16 +226,16 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
           </section>
 
           <section className="card">
-            <h2 className="card-title"><Database className="icon-sm" /> All Records ({graduates.length})</h2>
+            <h2 className="card-title"><Database className="icon-sm" /> {t('allRecords')} ({graduates.length})</h2>
             <div className="table-container">
               <table className="data-table">
                 <thead>
                   <tr>
-                    <th>Full Name</th>
-                    <th>National ID</th>
-                    <th>Faculty</th>
-                    <th>Department</th>
-                    <th>Graduation Year</th>
+                    <th>{t('fullName')}</th>
+                    <th>{t('nationalId')}</th>
+                    <th>{t('faculty')}</th>
+                    <th>{t('department')}</th>
+                    <th>{t('graduationYear')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -239,7 +250,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
                   ))}
                 </tbody>
               </table>
-              {graduates.length === 0 && <div className="empty-state">No records yet. Upload a file or add manually.</div>}
+              {graduates.length === 0 && <div className="empty-state">{t('noRecords')}</div>}
             </div>
           </section>
         </div>
@@ -247,7 +258,7 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
 
       {activeView === 'history' && !selectedUpload && (
         <section className="card">
-          <h2 className="card-title"><FileText className="icon-sm" /> Upload History ({uploadHistory.length})</h2>
+          <h2 className="card-title"><FileText className="icon-sm" />  {t('uploadHistory')} ({uploadHistory.length})</h2>
           <div className="history-list">
             {uploadHistory.map((upload) => (
               <div key={upload.id} className="history-item">
@@ -261,12 +272,12 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
                   </div>
                 </div>
                 <div className="history-actions">
-                  <button onClick={() => setSelectedUpload(upload)} className="btn-view"><Eye className="icon-xs" /> View</button>
-                  <button onClick={() => {if(window.confirm('Delete this upload? This will remove all associated records.')) handleDeleteUpload(upload.id)}} className="btn-delete"><Trash2 className="icon-xs" /> Delete</button>
+                  <button onClick={() => setSelectedUpload(upload)} className="btn-view"><Eye className="icon-xs" />{t('view')}</button>
+                  <button onClick={() => {if(window.confirm(t('deleteConfirm'))) handleDeleteUpload(upload.id)}} className="btn-delete"><Trash2 className="icon-xs" /> {t('delete')}</button>
                 </div>
               </div>
             ))}
-            {uploadHistory.length === 0 && <div className="empty-state">No upload history yet.</div>}
+            {uploadHistory.length === 0 && <div className="empty-state">{t('noUploadHistory')}</div>}
           </div>
         </section>
       )}
@@ -278,17 +289,17 @@ const GraduateRecords = ({ currentUser, onLogout }) => {
               <h2 className="card-title">{selectedUpload.fileName}</h2>
               <p className="upload-detail-meta">{new Date(selectedUpload.date).toLocaleString()} • {selectedUpload.recordCount} records</p>
             </div>
-            <button onClick={() => setSelectedUpload(null)} className="btn-back"><ArrowLeft size={18} />Back to History</button>
+            <button onClick={() => setSelectedUpload(null)} className="btn-back"><ArrowLeft size={18} />{t('backToHistory')}</button>
           </div>
           <div className="table-container">
             <table className="data-table">
               <thead>
                 <tr>
-                  <th>Full Name</th>
-                  <th>National ID</th>
-                  <th>Faculty</th>
-                  <th>Department</th>
-                  <th>Graduation Year</th>
+                <th>{t('fullName')}</th>
+                <th>{t('nationalId')}</th>
+                <th>{t('faculty')}</th>
+                <th>{t('department')}</th>
+                <th>{t('graduationYear')}</th>
                 </tr>
               </thead>
               <tbody>

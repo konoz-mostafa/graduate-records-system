@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { User } from 'lucide-react';
-import './Register.css';
+import { useTranslation } from 'react-i18next';
+import '../../i18n/i18n';
+import { Flag, User } from 'lucide-react';
+import './Register.css'
+
 
 const Register = ({ onSwitchToLogin }) => {
   const [credentials, setCredentials] = useState({
@@ -12,6 +15,7 @@ const Register = ({ onSwitchToLogin }) => {
     confirmPassword: ''
   });
   const [loading, setLoading] = useState(false);
+  const { t, i18n } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,82 +72,90 @@ const Register = ({ onSwitchToLogin }) => {
             <div className="auth-icon">
               <User className="icon" />
             </div>
-            <h1>Create Account</h1>
-            <p>University Management System</p>
+            <h1>{t('registerTitle')}</h1>
+            <p>{t('registerSub')}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="auth-form">
             <div className="form-group">
-              <label>Full Name</label>
+              <label>{t('fullName')}</label>
               <input
                 type="text"
                 value={credentials.fullName}
                 onChange={(e) => setCredentials({ ...credentials, fullName: e.target.value })}
-                placeholder="Enter your full name"
+                placeholder={t('fullNamePlaceholder')}
               />
             </div>
 
             <div className="form-group">
-              <label>Email</label>
+              <label>{t('email')}</label>
               <input
                 type="email"
                 value={credentials.email}
                 onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
-                placeholder="Enter your email"
+                placeholder={t('emailPlaceholder')}
               />
             </div>
 
             <div className="form-group">
-              <label>National ID</label>
+              <label>{t('nationalId')}</label>
               <input
                 type="text"
                 value={credentials.nationalId}
                 onChange={(e) => setCredentials({ ...credentials, nationalId: e.target.value })}
-                placeholder="Enter your national ID"
+                placeholder={t('nationalIdPlaceholder')}
               />
             </div>
 
             <div className="form-group">
-              <label>Phone Number</label>
+              <label>{t('phone')}</label>
               <input
                 type="text"
                 value={credentials.phone}
                 onChange={(e) => setCredentials({ ...credentials, phone: e.target.value })}
-                placeholder="Enter your phone number"
+                placeholder={t('phonePlaceholder')} 
               />
             </div>
 
             <div className="form-group">
-              <label>Password</label>
+              <label>{t('password')}</label>
               <input
                 type="password"
                 value={credentials.password}
                 onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-                placeholder="Choose a password"
+                placeholder={t('passwordPlaceholder')}
               />
             </div>
 
             <div className="form-group">
-              <label>Confirm Password</label>
+              <label>{t('confirmPassword')}</label>
               <input
                 type="password"
                 value={credentials.confirmPassword}
                 onChange={(e) => setCredentials({ ...credentials, confirmPassword: e.target.value })}
-                placeholder="Confirm your password"
+                placeholder={t('confirmPasswordPlaceholder')}
               />
             </div>
 
             <button type="submit" className="btn-primary" disabled={loading}>
-              {loading ? 'Registering...' : 'Sign Up'}
+            {loading ? t('registering') : t('signup')}
             </button>
 
             <div className="auth-switch">
               <button type="button" onClick={onSwitchToLogin} className="link-button">
-                Already have an account? Log In
+              {t('haveAccount')} {t('login')}
               </button>
             </div>
           </form>
         </div>
+        <div className="lang-switch">
+  <button 
+    className="icon-btn" 
+    onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en')}
+  >
+    <Flag size={20} /> {i18n.language === 'en' ? 'AR' : 'EN'}
+  </button>
+</div>
       </div>
     </div>
   );
