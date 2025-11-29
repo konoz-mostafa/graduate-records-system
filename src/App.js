@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
-import GraduateRecords from './pages/main-system/GraduateRecords .jsx';
+import GraduateRecords from './pages/main-system/GraduateRecords.jsx';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -47,22 +47,24 @@ const App = () => {
       </Routes>
     </Router>
 
+  //   <Router>
+  //   <Routes>
+  //     <Route path="/" element={<Navigate to="/graduates-records-system/login" />} />
+  //     <Route path="/graduates-records-system/login" element={<Login />} />
+  //     <Route path="/graduates-records-system/register" element={<Register />} />
+  //     <Route 
+  //       path="/graduates-records-system/records" 
+  //       element={<GraduateRecords currentUser={currentUser} onLogout={handleLogout} />} 
+  //     />
+  //     <Route path="*" element={<Navigate to="/graduates-records-system/login" />} />
+  //   </Routes>
+  // </Router>
+   
+
     
   );
 };
 
 export default App;
 
-{/* <Router>
-    <Routes>
-      <Route path="/" element={<Navigate to="/graduates-records-system/login" />} />
-      <Route path="/graduates-records-system/login" element={<Login />} />
-      <Route path="/graduates-records-system/register" element={<Register />} />
-      <Route 
-        path="/graduates-records-system/records" 
-        element={<GraduateRecords currentUser={currentUser} onLogout={handleLogout} />} 
-      />
-      <Route path="*" element={<Navigate to="/graduates-records-system/login" />} />
-    </Routes>
-  </Router>
-   */}
+
